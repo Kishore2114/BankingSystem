@@ -1,0 +1,12 @@
+# Eclipse files
+.classpath
+.project
+.settings/
+bin/
+
+# MySQL connector jar
+*.jar
+
+# OS files
+.DS_Store
+Thumbs.db
