@@ -113,4 +113,30 @@ public class AccountDAO {
     public String generateAccountNumber() {
         return "ACC" + System.currentTimeMillis();
     }
+ // ─── GET ALL ACCOUNTS ──────────────────────────────────
+    public List<Account> getAllAccounts() {
+        List<Account> list = new ArrayList<>();
+        String sql = "SELECT * FROM accounts ORDER BY account_id";
+
+        try {
+            Connection conn      = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs         = ps.executeQuery();
+
+            while (rs.next()) {
+                Account account = new Account();
+                account.setAccountId(rs.getInt("account_id"));
+                account.setCustomerId(rs.getInt("customer_id"));
+                account.setAccountNumber(rs.getString("account_number"));
+                account.setAccountType(rs.getString("account_type"));
+                account.setBalance(rs.getDouble("balance"));
+                account.setStatus(rs.getString("status"));
+                list.add(account);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Get all accounts failed: " + e.getMessage());
+        }
+        return list;
+    }
 }

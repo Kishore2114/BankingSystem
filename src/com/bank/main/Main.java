@@ -1,5 +1,6 @@
 package com.bank.main;
 
+import com.bank.service.AdminService;
 import com.bank.service.CustomerService;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ public class Main {
 
         Scanner sc = new Scanner(System.in);
         CustomerService customerService = new CustomerService(sc);
+        AdminService    adminService    = new AdminService(sc);
 
         boolean running = true;
 
@@ -18,6 +20,7 @@ public class Main {
             System.out.println("==========================");
             System.out.println("1. Register");
             System.out.println("2. Login");
+            System.out.println("3. Admin Login");
             System.out.println("0. Exit");
             System.out.println("==========================");
             System.out.print("Enter choice: ");
@@ -27,6 +30,7 @@ public class Main {
             switch (choice) {
                 case "1" -> customerService.register();
                 case "2" -> customerService.login();
+                case "3" -> adminService.login();
                 case "0" -> {
                     System.out.println("Thank you! Goodbye.");
                     running = false;
